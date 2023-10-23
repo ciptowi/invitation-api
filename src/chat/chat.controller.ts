@@ -13,7 +13,7 @@ import { UpdateChatDto } from './dto/update-chat.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('chat')
-@ApiTags('chat')
+@ApiTags('Chat')
 export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 

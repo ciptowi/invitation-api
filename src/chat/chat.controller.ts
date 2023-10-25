@@ -6,11 +6,12 @@ import {
   Param,
   Delete,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @Controller('chat')
 @ApiTags('Chat')
@@ -22,9 +23,24 @@ export class ChatController {
     return this.chatService.create(createChatDto);
   }
 
+  @ApiQuery({
+    name: 'keyword',
+    type: String,
+    required: false,
+  })
+  @ApiQuery({
+    name: 'page',
+    type: Number,
+    required: true,
+  })
+  @ApiQuery({
+    name: 'size',
+    type: Number,
+    required: true,
+  })
   @Get()
-  findAll() {
-    return this.chatService.findAll();
+  findAll(@Query() { keyword, page, size }) {
+    return this.chatService.findAll({ keyword, page, size });
   }
 
   @Get(':id')

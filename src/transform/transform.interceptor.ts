@@ -12,6 +12,7 @@ import { BaseResponse } from '../http/base.response';
 export class TransformInterceptor<T>
   implements NestInterceptor<T, BaseResponse<T>>
 {
+  public message: string = 'Success';
   intercept(
     context: ExecutionContext,
     next: CallHandler,
@@ -23,7 +24,7 @@ export class TransformInterceptor<T>
       map((data) => ({
         statusCode: status,
         success: true,
-        message: '',
+        message: this.message,
         data,
       })),
     );

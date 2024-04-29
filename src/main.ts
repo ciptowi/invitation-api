@@ -5,9 +5,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './http/exception.filter';
 import { ValidationPipe } from './validation/validation.pipe';
 import { TransformInterceptor } from './transform/transform.interceptor';
-
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+  });
 
   // Generate Swagger Documentation API
   const config = new DocumentBuilder()

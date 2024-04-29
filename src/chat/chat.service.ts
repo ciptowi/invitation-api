@@ -28,7 +28,7 @@ export class ChatService {
       skip: skip,
     });
 
-    return paginateResponse(data, page, take);
+    return paginateResponse<Chat[]>(data, page, take);
   }
 
   async findOne(id: number) {
